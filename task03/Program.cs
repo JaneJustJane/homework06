@@ -1,0 +1,45 @@
+﻿// В прямоугольной матрице найти строку с наименьшей суммой элементов.
+
+void FillMatrix (int [,] m1)
+{
+    for (int i=0; i<m1.GetLength(0); i++)
+    {
+        for (int j=0; j<m1.GetLength(1); j++)
+        {
+            m1[i,j]=new Random().Next(0,10);
+        }
+    }
+}
+
+void PrintMatrix (int [,] m2)
+{
+    for (int i=0; i<m2.GetLength(0); i++)
+    {
+        for (int j=0; j<m2.GetLength(1); j++)
+        {
+            Console.Write ($"{m2[i,j]}  ");
+        }
+    Console.WriteLine ();
+    }
+}
+
+Console.Write ($"введите кол-во строк ");
+int rows = int.Parse(Console.ReadLine () ?? "0");
+Console.Write ($"введите кол-во столбцов ");
+int columns = int.Parse(Console.ReadLine() ?? "0");
+int [,] matrix = new int [rows,columns];
+FillMatrix (matrix);
+Console.WriteLine();
+Console.WriteLine("матрица:");
+PrintMatrix (matrix);
+
+int sumMin=int.MaxValue;
+for (int i=0; i<rows; i++)
+{   
+    int[] sum = new int[rows];
+    for (int j=0; j<columns; j++)
+            sum[i]= sum[i]+matrix[i,j];
+    if (sum[i]<sumMin)
+        sumMin=sum[i];
+}
+Console.WriteLine($"Минимальная сумма по строкам = {sumMin}");
